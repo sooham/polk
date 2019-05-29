@@ -2,7 +2,7 @@
 favicon: /favicon.ico
 
 # SEO
-keywords: Sooham, Rafiz, Computer, Science, U of T, engineer
+keywords: Sooham, Rafiz, Computer, Science, U of T, Engineer, Data Structures, Google, Intel, Amazon, Apple, Big N, Technology
 
 # Site title separator
 separator: '-'
@@ -14,6 +14,7 @@ rss: /atom.xml
 sns:
   Blog: /archives
   GitHub: https://github.com/sooham
+  Linkedin: www.linkedin.com/in/sooham-rafiz
 
 # Nav menu
 menu:
