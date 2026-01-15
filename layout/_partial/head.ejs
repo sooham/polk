@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <!--<html lang="<%= config.language || 'en' %>">-->
 <head>
+  <% if (theme.google_analytics && theme.google_analytics !== 'G-XXXXXXXXXX') { %>
+  <!-- Google Analytics (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=<%= theme.google_analytics %>"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '<%= theme.google_analytics %>');
+  </script>
+  <% } %>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
   <%

@@ -29,6 +29,10 @@ sns:
   Linkedin: www.linkedin.com/in/sooham-rafiz
   Data Structure Algorithm Zoo: https://sooham.github.io/dsa-zoo
 
+# Google Analytics (GA4)
+# Get your measurement ID from: https://analytics.google.com
+google_analytics: G-XXXXXXXXXX
+
 # Nav menu
 menu:
   Home: /
