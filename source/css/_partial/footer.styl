@@ -1,11 +1,92 @@
-footer {
-  margin: 0.5em 20px 0 20px;
-  border-top: 3px double #ccc;
-  padding: 1em 0 1em 0;
-  font-size: 80%;
-  color: #888;
+// ============================================
+// Footer - Basquiat Raw Street Art Aesthetic
+// ============================================
 
-  .author {
-    color: #000;
-  }
-}
+.basquiat-footer
+  background var(--bg-cream, #faf8f3)
+  position relative
+  z-index 10
+
+.footer-border
+  height 4px
+  background repeating-linear-gradient(90deg,
+    var(--text-ink, #2c2824) 0, var(--text-ink, #2c2824) 8px,
+    transparent 8px, transparent 16px,
+    var(--accent-mustard, #d4a84b) 16px, var(--accent-mustard, #d4a84b) 22px,
+    transparent 22px, transparent 30px)
+  opacity 0.4
+
+.footer-content
+  max-width 960px
+  margin 0 auto
+  padding 2rem
+  text-align center
+  position relative
+
+.footer-links
+  display flex
+  justify-content center
+  align-items center
+  gap 0.5rem
+  margin-bottom 1rem
+  flex-wrap wrap
+
+  a
+    font-family var(--font-hand, 'Bebas Neue', 'Impact', sans-serif)
+    font-size 1.1rem
+    font-weight 400
+    letter-spacing 1px
+    text-transform uppercase
+    color var(--text-light, #6b6359)
+    text-decoration none
+    padding 0.3rem 0.6rem
+    transition all 0.3s ease
+
+    &:hover
+      color var(--accent-terracotta, #c45d3a)
+      transform rotate(-2deg)
+
+.link-dot
+  width 5px
+  height 5px
+  background var(--border-sketch, #c9c2b5)
+  border-radius 50%
+  opacity 0.5
+
+.copyright
+  font-family var(--font-sketch, 'Work Sans', sans-serif)
+  font-size 0.9rem
+  font-weight 500
+  color var(--text-light, #6b6359)
+  margin 0
+  opacity 0.8
+
+.author
+  color var(--text-ink, #2c2824)
+  font-weight 600
+
+.footer-crown
+  position absolute
+  bottom 1.5rem
+  right 2rem
+  transform rotate(8deg)
+  opacity 0.4
+  filter drop-shadow(1px 1px 0 var(--text-ink, #2c2824))
+
+// ============================================
+// Responsive
+// ============================================
+
+@media (max-width: 600px)
+  .footer-content
+    padding 1.5rem
+
+  .footer-links a
+    font-size 1rem
+    padding 0.2rem 0.4rem
+
+  .copyright
+    font-size 0.85rem
+
+  .footer-crown
+    display none

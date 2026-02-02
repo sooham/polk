@@ -1,22 +1,33 @@
-<header class="header">
-  <div class="blog-title">
-    <a href="<%- url_for() %>" class="logo"><%= config.title %></a>
-    <div class="subtitle"><%= config.subtitle || '' %></div>
+<header class="header basquiat-header">
+  <div class="header-container">
+    <div class="blog-title">
+      <a href="<%- url_for() %>" class="logo">
+        <svg class="logo-crown" viewBox="0 0 30 20" width="22" height="15">
+          <path d="M2 18 L6 4 L10 12 L15 2 L20 12 L24 4 L28 18" stroke="#d4a84b" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <circle cx="6" cy="4" r="2" fill="#d4a84b"/>
+          <circle cx="15" cy="2" r="2" fill="#d4a84b"/>
+          <circle cx="24" cy="4" r="2" fill="#d4a84b"/>
+        </svg>
+        <span class="logo-text"><%= config.title %></span>
+      </a>
+    </div>
+    <nav class="navbar">
+      <ul class="menu">
+        <li class="menu-item">
+          <a href="/" class="menu-item-link">About</a>
+        </li>
+        <li class="menu-item">
+          <a href="/archives" class="menu-item-link<%= is_archive() ? ' active' : '' %>">Blog</a>
+        </li>
+        <li class="menu-item">
+          <a href="https://github.com/sooham" class="menu-item-link" target="_blank" rel="noopener">GitHub</a>
+        </li>
+        <li class="menu-item">
+          <a href="/visualizations" class="menu-item-link">Visualizations</a>
+        </li>
+      </ul>
+    </nav>
   </div>
-  <nav class="navbar">
-    <ul class="menu">
-      <li class="menu-item">
-        <a href="/" class="menu-item-link">About</a>
-      </li>
-      <li class="menu-item">
-        <a href="/archives" class="menu-item-link<%= is_archive() ? ' active' : '' %>">Blog</a>
-      </li>
-      <li class="menu-item">
-        <a href="https://github.com/sooham" class="menu-item-link" target="_blank" rel="noopener">GitHub</a>
-      </li>
-      <li class="menu-item">
-        <a href="/visualizations" class="menu-item-link">Visualizations</a>
-      </li>
-    </ul>
-  </nav>
+  <!-- Decorative bottom border -->
+  <div class="header-border"></div>
 </header>

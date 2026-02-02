@@ -1,116 +1,670 @@
-.post {
-  padding: 0 20px;
-  margin-bottom: 1.5em;
+// ============================================
+// Blog Post Page - Basquiat Raw Street Art Aesthetic
+// Bold, expressive, graffiti-inspired design for article reading
+// ============================================
 
-  img {
-    max-width: 100%;
-  }
-  
-  table {
-    border-collapse: collapse;
-    border-spacing: 0;
+// ============================================
+// Post Page Container
+// ============================================
 
-    td, th {
-      padding: 6px 13px;
-      border: 1px solid #dfe2e5;
-    }
-  }
+.basquiat-post
+  min-height 100vh
+  background var(--bg-cream, #faf8f3)
+  position relative
+  overflow-x hidden
+  padding-bottom 4rem
 
-  hr {
-    margin: 1.5em 0;
-  }
+// Paper texture overlay
+.post-texture
+  position fixed
+  top 0
+  left 0
+  right 0
+  bottom 0
+  pointer-events none
+  z-index 0
+  background-image url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E")
+  opacity 0.6
 
-  .post-content {
-    text-align: justify;
-    
-    a {
-      border-bottom: 1px dotted;
+// ============================================
+// Post Hero Section (Title Area)
+// ============================================
 
-      &:hover {
-        border-bottom: 1px solid;
-      }
-    }
+.post-hero
+  text-align center
+  padding 4rem 2rem 3rem
+  max-width 960px
+  margin 0 auto
+  position relative
+  z-index 1
 
-    ul, ol {
-      text-align: left;
+.post-crown
+  display block
+  margin 0 auto 1rem
+  transform rotate(-3deg)
+  filter drop-shadow(2px 2px 0 var(--text-ink, #2c2824))
+  animation crown-float-post 4s ease-in-out infinite
 
-      li {
-        padding: 5px;
-        line-height: 1.5em;
-      }
-    }
-  }
+@keyframes crown-float-post
+  0%, 100%
+    transform rotate(-3deg)
+  25%
+    transform rotate(-6deg) translateY(-3px)
+  50%
+    transform rotate(-1deg)
+  75%
+    transform rotate(-5deg) translateY(-2px)
 
-  figure {
-    margin: 0;
-    table {
-      width: 100%;
-      
-      .code {
-        border: 0;
-        padding: 0;
-      }
-    }
+.post-page .post-title
+  font-family var(--font-hand, 'Bebas Neue', 'Impact', sans-serif)
+  font-size 3rem
+  font-weight 400
+  letter-spacing 3px
+  text-transform uppercase
+  color var(--text-ink, #2c2824)
+  margin 0 0 1.5rem
+  line-height 1.15
+  position relative
+  display inline-block
 
-    .gutter {
-      display: none;
-    }
-  }
+  // Raw underline accent
+  &::after
+    content ''
+    position absolute
+    bottom -8px
+    left -3%
+    width 106%
+    height 8px
+    background linear-gradient(90deg, transparent 0%, var(--accent-terracotta, #c45d3a) 10%, var(--accent-terracotta, #c45d3a) 90%, transparent 100%)
+    opacity 0.35
+    transform rotate(-0.5deg)
+    border-radius 3px
 
-  blockquote {
-    margin: 0;
-    padding: 0 15px;
-    color: #777;
-    border-left: 4px solid #ddd;
-  }
+// Post meta section
+.post-meta
+  display flex
+  flex-wrap wrap
+  justify-content center
+  align-items center
+  gap 1.5rem
+  margin-top 0.5rem
 
-  pre {
-    font-family: 'Space Mono', 'Courier New', monospace;
-    margin: 0;
-    padding: 0.5em 1.5em;
-    overflow: auto;
-    font-size: 85%;
-    line-height: 1.8;
-    background-color: #f7f7f7;
-    border: 1px solid #ccc;
-  }
+.meta-date
+  display flex
+  flex-direction column
+  align-items center
+  gap 0.2rem
 
-  p {
-    line-height: 1.5em;
-  }
+.date-label
+  font-family var(--font-mono-hand, 'Space Mono', monospace)
+  font-size 0.7rem
+  font-weight 400
+  letter-spacing 1px
+  text-transform uppercase
+  color var(--text-light, #6b6359)
+  opacity 0.7
 
-  .post-footer {
-    line-height: 1;
-    min-height: 1em;
+.date-value
+  font-family var(--font-sketch, 'Work Sans', sans-serif)
+  font-size 1rem
+  font-weight 600
+  color var(--text-pencil, #3d3832)
+  letter-spacing 0.5px
 
-    .top {
-      float: right;
-      color: #666;
+.meta-tags
+  display flex
+  flex-wrap wrap
+  gap 0.6rem
+  justify-content center
 
-      &:hover {
-        color: #000;
-      }
-    }
+.meta-tag
+  font-family var(--font-mono-hand, 'Space Mono', monospace)
+  font-size 0.85rem
+  font-weight 400
+  color var(--accent-terracotta, #c45d3a)
+  text-decoration none
+  transition all 0.2s ease
 
-    .post-tag-list {
-      display: inline-block;
-      padding: 0;
-      margin: 0 0 0.5em 0;
-      color: #999;
+  &:hover
+    color var(--text-ink, #2c2824)
+    text-decoration underline
 
-      .post-tag-list-item {
-        display: inline-block;
-        margin: 0 1em 0 0;
+// Hero paint strokes
+.hero-paint-stroke
+  position absolute
+  pointer-events none
+  z-index 0
+  border-radius 3px
 
-        a {
-          font-size: 85%;
-        }
+.hero-paint-stroke.stroke-1
+  width 70px
+  height 7px
+  background var(--accent-mustard, #d4a84b)
+  top 25px
+  right 5%
+  transform rotate(-10deg)
+  opacity 0.25
 
-        &:before {
-          content: '#';
-        }
+.hero-paint-stroke.stroke-2
+  width 50px
+  height 5px
+  background var(--accent-sage, #6b8f71)
+  bottom 40px
+  left 8%
+  transform rotate(8deg)
+  opacity 0.2
 
-      }
-    }
-  }
-}
+.hero-paint-stroke.stroke-3
+  width 40px
+  height 4px
+  background var(--accent-terracotta, #c45d3a)
+  top 50%
+  left 3%
+  transform rotate(-5deg)
+  opacity 0.15
+
+// ============================================
+// Post Body (Main Content Area)
+// ============================================
+
+.post-body
+  max-width 900px
+  margin 0 auto
+  padding 0 2rem
+  position relative
+  z-index 1
+
+// Side annotation decoration
+.side-annotation
+  position absolute
+  left -40px
+  top 0
+  display flex
+  flex-direction column
+  align-items center
+  gap 0.5rem
+  opacity 0.25
+
+.annotation-symbol
+  font-size 1rem
+  color var(--accent-terracotta, #c45d3a)
+
+.annotation-line
+  width 2px
+  height 150px
+  background repeating-linear-gradient(180deg,
+    var(--text-pencil, #3d3832) 0, var(--text-pencil, #3d3832) 6px,
+    transparent 6px, transparent 12px)
+
+// ============================================
+// Post Content Styling
+// ============================================
+
+.basquiat-post .post-content
+  font-family var(--font-sketch, 'Work Sans', sans-serif)
+  font-size 1.1rem
+  font-weight 500
+  line-height 1.85
+  color var(--text-pencil, #3d3832)
+  text-align left
+  position relative
+  z-index 2
+
+  // Paragraphs
+  p
+    margin 0 0 1.5rem
+    line-height 1.85
+
+  // Headings
+  h1, h2, h3, h4, h5, h6
+    font-family var(--font-hand, 'Bebas Neue', 'Impact', sans-serif)
+    font-weight 400
+    text-transform uppercase
+    letter-spacing 2px
+    color var(--text-ink, #2c2824)
+    margin 2.5rem 0 1rem
+    position relative
+
+    &::after
+      content ''
+      position absolute
+      bottom -4px
+      left 0
+      height 3px
+      background var(--accent-mustard, #d4a84b)
+      opacity 0.4
+      transform rotate(-0.5deg)
+      border-radius 2px
+
+  h1
+    font-size 2.2rem
+    letter-spacing 3px
+    &::after
+      width 40%
+
+  h2
+    font-size 1.9rem
+    letter-spacing 2px
+    &::after
+      width 35%
+
+  h3
+    font-size 1.6rem
+    &::after
+      width 30%
+
+  h4
+    font-size 1.4rem
+    &::after
+      width 25%
+
+  h5, h6
+    font-size 1.2rem
+    &::after
+      width 20%
+
+  // Links
+  a
+    color var(--accent-terracotta, #c45d3a)
+    text-decoration none
+    border-bottom 2px solid transparent
+    transition all 0.2s ease
+
+    &:hover
+      border-bottom-color var(--accent-terracotta, #c45d3a)
+
+  // Strong and emphasis
+  strong, b
+    font-weight 700
+    color var(--text-ink, #2c2824)
+
+  em, i
+    font-style italic
+    color var(--text-pencil, #3d3832)
+
+  // Lists
+  ul, ol
+    margin 0 0 1.5rem
+    padding-left 1.5rem
+
+    li
+      margin-bottom 0.6rem
+      line-height 1.7
+      position relative
+
+  ul li
+    list-style none
+    padding-left 0.5rem
+
+    &::before
+      content '▸'
+      position absolute
+      left -1.5rem
+      color var(--accent-terracotta, #c45d3a)
+      font-weight 700
+
+  ol
+    counter-reset list-counter
+
+    li
+      list-style none
+      counter-increment list-counter
+
+      &::before
+        content counter(list-counter) '.'
+        position absolute
+        left -1.5rem
+        font-family var(--font-hand, 'Bebas Neue', 'Impact', sans-serif)
+        font-size 1rem
+        color var(--accent-mustard, #d4a84b)
+        font-weight 400
+
+  // Blockquotes
+  blockquote
+    margin 2rem 0
+    padding 1.5rem 2rem
+    background var(--bg-paper, #f7f4ed)
+    border-left 5px solid var(--accent-mustard, #d4a84b)
+    border-right 2px dashed var(--accent-mustard, #d4a84b)
+    position relative
+    font-style italic
+    color var(--text-light, #6b6359)
+
+    &::before
+      content '"'
+      position absolute
+      top -10px
+      left 15px
+      font-family var(--font-hand, 'Bebas Neue', 'Impact', sans-serif)
+      font-size 4rem
+      color var(--accent-mustard, #d4a84b)
+      opacity 0.3
+      line-height 1
+
+    p
+      margin 0
+      position relative
+      z-index 1
+
+    cite
+      display block
+      margin-top 1rem
+      font-family var(--font-mono-hand, 'Space Mono', monospace)
+      font-size 0.85rem
+      font-style normal
+      color var(--text-light, #6b6359)
+
+      &::before
+        content '— '
+
+  // Code styling - preserved from existing Basquiat code block theme
+  // (Inline and block code keep existing styles from style.styl)
+
+  // Tables
+  table
+    width 100%
+    margin 2rem 0
+    border-collapse separate
+    border-spacing 0
+    border 3px solid var(--text-ink, #2c2824)
+    box-shadow 4px 4px 0 var(--border-sketch, #c9c2b5)
+
+    th, td
+      padding 0.8rem 1rem
+      border-bottom 2px solid var(--border-sketch, #c9c2b5)
+      text-align left
+
+    th
+      font-family var(--font-hand, 'Bebas Neue', 'Impact', sans-serif)
+      font-weight 400
+      font-size 1rem
+      letter-spacing 1px
+      text-transform uppercase
+      background var(--bg-paper, #f7f4ed)
+      color var(--text-ink, #2c2824)
+
+    tr:last-child td
+      border-bottom none
+
+    tr:nth-child(even)
+      background var(--bg-paper, #f7f4ed)
+
+  // Horizontal rule
+  hr
+    margin 3rem 0
+    border none
+    height 4px
+    background repeating-linear-gradient(90deg,
+      var(--text-ink, #2c2824) 0, var(--text-ink, #2c2824) 10px,
+      transparent 10px, transparent 20px,
+      var(--accent-mustard, #d4a84b) 20px, var(--accent-mustard, #d4a84b) 28px,
+      transparent 28px, transparent 38px)
+    opacity 0.5
+
+  // Images
+  img
+    max-width 100%
+    height auto
+    display block
+    margin 2rem auto
+    border 3px solid var(--text-ink, #2c2824)
+    box-shadow 6px 6px 0 var(--border-sketch, #c9c2b5)
+
+  figure
+    margin 2rem 0
+    text-align center
+
+    img
+      margin 0 auto 1rem
+
+    figcaption
+      font-family var(--font-sketch, 'Work Sans', sans-serif)
+      font-size 0.9rem
+      font-style italic
+      color var(--text-light, #6b6359)
+
+  // Mark/highlight
+  mark
+    background linear-gradient(180deg, transparent 50%, var(--accent-mustard, #d4a84b) 50%)
+    padding 0 0.2rem
+
+// Content decorations
+.content-decoration
+  position absolute
+  top 200px
+  right -60px
+  width 100px
+  height 200px
+  pointer-events none
+  z-index 0
+
+.deco-splatter
+  position absolute
+  border-radius 50%
+
+.deco-splatter.splatter-a
+  width 50px
+  height 50px
+  background radial-gradient(ellipse at 30% 30%, var(--accent-mustard, #d4a84b) 0%, transparent 65%)
+  top 0
+  left 0
+  opacity 0.15
+
+.deco-splatter.splatter-b
+  width 40px
+  height 55px
+  background radial-gradient(ellipse at 60% 40%, var(--accent-sage, #6b8f71) 0%, transparent 65%)
+  bottom 0
+  right 0
+  opacity 0.12
+  transform rotate(30deg)
+
+// ============================================
+// Post Footer Section
+// ============================================
+
+.post-footer-section
+  max-width 900px
+  margin 4rem auto 0
+  padding 0 2rem
+  position relative
+  z-index 1
+
+// Footer divider with crown
+.footer-divider
+  display flex
+  align-items center
+  justify-content center
+  gap 1.5rem
+  margin-bottom 2rem
+
+.divider-line
+  flex 1
+  max-width 150px
+  height 3px
+  background repeating-linear-gradient(90deg,
+    var(--text-pencil, #3d3832) 0, var(--text-pencil, #3d3832) 6px,
+    transparent 6px, transparent 12px)
+  opacity 0.3
+
+.divider-crown
+  transform rotate(-2deg)
+  filter drop-shadow(1px 1px 0 var(--text-ink, #2c2824))
+
+// Tags in footer
+.footer-tags
+  text-align center
+  margin-bottom 2.5rem
+
+.tags-label
+  font-family var(--font-mono-hand, 'Space Mono', monospace)
+  font-size 0.75rem
+  font-weight 700
+  letter-spacing 2px
+  text-transform uppercase
+  color var(--text-light, #6b6359)
+  display block
+  margin-bottom 0.8rem
+
+.tags-list
+  display flex
+  flex-wrap wrap
+  justify-content center
+  gap 0.8rem
+
+.footer-tag
+  font-family var(--font-hand, 'Bebas Neue', 'Impact', sans-serif)
+  font-size 1.1rem
+  font-weight 400
+  letter-spacing 1px
+  text-transform uppercase
+  color var(--text-pencil, #3d3832)
+  text-decoration none
+  padding 0.5rem 1rem
+  background var(--bg-paper, #f7f4ed)
+  border 2px solid var(--text-pencil, #3d3832)
+  box-shadow 3px 3px 0 var(--border-sketch, #c9c2b5)
+  transition all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)
+
+  &:hover
+    transform translateY(-2px) rotate(-1deg)
+    box-shadow 5px 5px 0 var(--border-sketch, #c9c2b5)
+    border-color var(--accent-terracotta, #c45d3a)
+    color var(--accent-terracotta, #c45d3a)
+
+// Navigation links
+.post-navigation
+  display flex
+  justify-content space-between
+  align-items center
+  gap 1rem
+  flex-wrap wrap
+
+.nav-link
+  display inline-flex
+  align-items center
+  gap 0.6rem
+  font-family var(--font-hand, 'Bebas Neue', 'Impact', sans-serif)
+  font-size 1.15rem
+  font-weight 400
+  letter-spacing 1px
+  text-transform uppercase
+  color var(--text-pencil, #3d3832)
+  text-decoration none
+  padding 0.8rem 1.2rem
+  background var(--bg-paper, #f7f4ed)
+  border 3px solid var(--text-ink, #2c2824)
+  box-shadow 4px 4px 0 var(--text-ink, #2c2824)
+  transition all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)
+
+  &:hover
+    transform translateY(-3px) rotate(-1deg)
+    box-shadow 6px 6px 0 var(--text-ink, #2c2824), 9px 9px 0 var(--accent-mustard, #d4a84b)
+    background var(--accent-mustard, #d4a84b)
+    color var(--text-ink, #2c2824)
+
+    svg
+      transform translateX(-3px)
+
+  &.top-link:hover svg
+    transform translateY(-3px)
+
+  svg
+    transition transform 0.3s ease
+
+// Syntax Highlighting - preserved from existing Basquiat code block theme in style.styl
+// (Keep existing highlight styles from global stylesheet)
+
+// ============================================
+// MathJax Styling
+// ============================================
+
+.basquiat-post .MathJax_Display
+  margin 2rem 0
+  padding 1.5rem
+  background var(--bg-paper, #f7f4ed)
+  border-left 4px solid var(--accent-mustard, #d4a84b)
+  overflow-x auto
+
+// ============================================
+// Responsive Styles
+// ============================================
+
+@media (max-width: 800px)
+  .side-annotation
+    display none
+
+  .content-decoration
+    display none
+
+@media (max-width: 600px)
+  .post-hero
+    padding 3rem 1.5rem 2rem
+
+  .post-crown
+    width 45px
+    height 30px
+
+  .post-page .post-title
+    font-size 2.2rem
+    letter-spacing 2px
+
+    &::after
+      height 6px
+
+  .post-meta
+    gap 1rem
+    flex-direction column
+
+  .post-body
+    padding 0 1.5rem
+
+  .basquiat-post .post-content
+    font-size 1rem
+
+    h1
+      font-size 1.8rem
+
+    h2
+      font-size 1.6rem
+
+    h3
+      font-size 1.4rem
+
+    h4, h5, h6
+      font-size 1.2rem
+
+    blockquote
+      padding 1rem 1.5rem
+      margin 1.5rem 0
+
+      &::before
+        font-size 3rem
+        top -5px
+        left 10px
+
+  .hero-paint-stroke
+    display none
+
+  .post-footer-section
+    padding 0 1.5rem
+
+  .post-navigation
+    flex-direction column
+    gap 0.8rem
+
+  .nav-link
+    width 100%
+    justify-content center
+
+@media (max-width: 400px)
+  .post-page .post-title
+    font-size 1.9rem
+    letter-spacing 1px
+
+  .footer-tag
+    font-size 1rem
+    padding 0.4rem 0.8rem
+
+  .tags-list
+    gap 0.5rem

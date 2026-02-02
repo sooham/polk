@@ -1,45 +1,505 @@
-.article-title {
-  font-family: 'Bebas Neue', 'Impact', sans-serif;
-  font-size: 1.8em;
-  font-weight: 400;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  line-height: 1.2em;
-  border-bottom: 1px solid #000;
-}
+// ============================================
+// Archive Page - Basquiat Raw Street Art Aesthetic
+// Bold, expressive, graffiti-inspired design
+// ============================================
 
-.archive {
-  padding: 0 20px;
-  margin-bottom: 1em;
+// CSS Custom Properties (inherit from landing.styl)
+// Using the same warm, paper-like colors
 
-  .post-archive {
-    list-style: none;
-    padding: 0;
+.basquiat-archive
+  min-height 100vh
+  background var(--bg-cream, #faf8f3)
+  position relative
+  overflow-x hidden
+  padding-bottom 4rem
 
-    .post-item {
-      margin: 6px 0;
-      line-height: 1.5;
+// Paper texture overlay
+.archive-texture
+  position fixed
+  top 0
+  left 0
+  right 0
+  bottom 0
+  pointer-events none
+  z-index 0
+  background-image url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E")
+  opacity 0.6
 
-      .post-date {
-        float: right;
-      
-        @media screen and (max-width: 425px) {
-          float: none;
-          margin-left: 0.5em;
-          font-size: 90%;
-          color: #999;
-        }
-      }
+// ============================================
+// Archive Hero Section
+// ============================================
 
-      .post-title {
-        font-family: 'Work Sans', sans-serif;
-        font-weight: 600;
-        border-bottom: 1px dotted;
+.archive-hero
+  text-align center
+  padding 4rem 2rem 3rem
+  max-width 960px
+  margin 0 auto
+  position relative
+  z-index 1
 
-        &:hover {
-          border-bottom: 1px solid;
-        }
-      }
-    }
-  }
-}
+.archive-title
+  display inline-block
+  position relative
+  margin 0 0 1rem
+
+.archive-crown
+  position absolute
+  top -45px
+  left 50%
+  transform translateX(-50%) rotate(-3deg)
+  filter drop-shadow(2px 2px 0 var(--text-ink, #2c2824))
+  animation crown-float 4s ease-in-out infinite
+  z-index 2
+
+.title-text
+  font-family var(--font-hand, 'Bebas Neue', 'Impact', sans-serif)
+  font-size 3.5rem
+  font-weight 400
+  letter-spacing 4px
+  text-transform uppercase
+  color var(--text-ink, #2c2824)
+  position relative
+  z-index 1
+
+.title-underline
+  position absolute
+  bottom -5px
+  left -5%
+  width 110%
+  height 10px
+  background linear-gradient(90deg, transparent 0%, var(--accent-terracotta, #c45d3a) 10%, var(--accent-terracotta, #c45d3a) 90%, transparent 100%)
+  opacity 0.35
+  transform rotate(-1deg)
+  border-radius 3px
+  z-index 0
+
+.archive-subtitle
+  font-family var(--font-sketch, 'Work Sans', sans-serif)
+  font-size 1.15rem
+  font-weight 500
+  color var(--text-light, #6b6359)
+  margin 0
+  letter-spacing 0.5px
+
+// Paint stroke decorations
+.hero-stroke
+  position absolute
+  pointer-events none
+  z-index 0
+  border-radius 3px
+
+.stroke-a
+  width 80px
+  height 8px
+  background var(--accent-mustard, #d4a84b)
+  top 20px
+  right 10%
+  transform rotate(-12deg)
+  opacity 0.25
+
+.stroke-b
+  width 60px
+  height 6px
+  background var(--accent-sage, #6b8f71)
+  bottom 30px
+  left 8%
+  transform rotate(8deg)
+  opacity 0.2
+
+// ============================================
+// Archive Content Grid
+// ============================================
+
+.archive-content
+  max-width 960px
+  margin 0 auto
+  padding 0 1.5rem
+  position relative
+  z-index 1
+
+// Year dividers
+.year-divider
+  display flex
+  align-items center
+  gap 1rem
+  margin 2.5rem 0 1.5rem
+  opacity 0
+  animation fade-in-slide 0.5s ease-out forwards
+  animation-delay var(--divider-delay, 0s)
+
+.year-text
+  font-family var(--font-hand, 'Bebas Neue', 'Impact', sans-serif)
+  font-size 2rem
+  font-weight 400
+  letter-spacing 3px
+  color var(--text-ink, #2c2824)
+  text-transform uppercase
+  white-space nowrap
+
+.year-line
+  flex 1
+  height 3px
+  background repeating-linear-gradient(90deg,
+    var(--text-ink, #2c2824) 0, var(--text-ink, #2c2824) 8px,
+    transparent 8px, transparent 16px,
+    var(--accent-mustard, #d4a84b) 16px, var(--accent-mustard, #d4a84b) 22px,
+    transparent 22px, transparent 30px)
+  opacity 0.4
+
+.year-symbol
+  font-size 1rem
+  color var(--accent-terracotta, #c45d3a)
+  opacity 0.6
+
+// ============================================
+// Archive Card - Basquiat Collage Style
+// ============================================
+
+.archive-card.basquiat-post-card
+  position relative
+  margin-bottom 1.2rem
+  background var(--bg-paper, #f7f4ed)
+  border 3px solid var(--text-ink, #2c2824)
+  box-shadow 5px 5px 0 var(--text-ink, #2c2824)
+  transition all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)
+  opacity 0
+  animation card-enter-archive 0.6s ease-out forwards
+  animation-delay var(--card-delay, 0s)
+
+  &:nth-child(odd)
+    transform rotate(-0.5deg)
+
+  &:nth-child(even)
+    transform rotate(0.3deg)
+
+  &:hover
+    transform rotate(0deg) translateY(-4px) scale(1.01)
+    box-shadow 8px 8px 0 var(--text-ink, #2c2824), 12px 12px 0 var(--accent-mustard, #d4a84b)
+    border-color var(--accent-terracotta, #c45d3a)
+
+    .card-title
+      color var(--accent-terracotta, #c45d3a)
+
+    .card-arrow
+      transform translateX(6px)
+      color var(--accent-terracotta, #c45d3a)
+
+    .card-date
+      background var(--accent-terracotta, #c45d3a)
+      transform rotate(-2deg) scale(1.05)
+
+    .mini-crown
+      animation crown-bounce 0.5s ease infinite
+
+    .card-scribble
+      animation jitter 0.15s infinite
+      opacity 0.5
+
+    .card-splatter
+      animation splatter-pulse 0.8s ease infinite
+
+@keyframes card-enter-archive
+  0%
+    opacity 0
+    transform translateY(25px) rotate(-2deg)
+  60%
+    opacity 1
+    transform translateY(-3px) rotate(0.5deg)
+  100%
+    opacity 1
+    transform translateY(0) rotate(var(--card-rotate, -0.5deg))
+
+// Collage layer decorations
+.card-collage-layer
+  position absolute
+  top 0
+  left 0
+  right 0
+  bottom 0
+  pointer-events none
+  z-index 1
+  overflow hidden
+
+  // Noise texture
+  &::before
+    content ''
+    position absolute
+    top 0
+    left 0
+    right 0
+    bottom 0
+    background-image url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E")
+
+.card-splatter
+  position absolute
+  border-radius 50%
+  transition all 0.3s ease
+
+.card-splatter.splatter-1
+  width 35px
+  height 35px
+  background radial-gradient(ellipse at 30% 30%, var(--accent-mustard, #d4a84b) 0%, transparent 65%)
+  top 8px
+  right 80px
+  opacity 0.18
+
+.card-splatter.splatter-2
+  width 30px
+  height 40px
+  background radial-gradient(ellipse at 60% 40%, var(--accent-sage, #6b8f71) 0%, transparent 65%)
+  bottom 10px
+  right 20px
+  opacity 0.15
+  transform rotate(30deg)
+
+.mini-crown
+  position absolute
+  top 10px
+  right 40px
+  transform rotate(-8deg)
+  opacity 0.7
+  filter drop-shadow(1px 1px 0 var(--text-ink, #2c2824))
+  transition all 0.3s ease
+
+.card-scribble
+  position absolute
+  top 12px
+  right 120px
+  font-family var(--font-hand, 'Bebas Neue', 'Impact', sans-serif)
+  font-size 0.7rem
+  font-weight 400
+  letter-spacing 2px
+  text-transform uppercase
+  color var(--text-pencil, #3d3832)
+  opacity 0.22
+  transform rotate(-5deg)
+  white-space nowrap
+  transition all 0.3s ease
+
+// Card link and content
+.card-link
+  display block
+  text-decoration none
+  color inherit
+  position relative
+  z-index 2
+
+.card-content
+  display flex
+  align-items center
+  gap 1.5rem
+  padding 1.3rem 1.8rem
+
+.card-date
+  display flex
+  flex-direction column
+  align-items center
+  justify-content center
+  min-width 58px
+  padding 0.6rem 0.8rem
+  background var(--text-ink, #2c2824)
+  color var(--bg-cream, #faf8f3)
+  transform rotate(-1deg)
+  transition all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)
+
+.date-month
+  font-family var(--font-mono-hand, 'Space Mono', monospace)
+  font-size 0.7rem
+  font-weight 700
+  letter-spacing 1px
+  text-transform uppercase
+  opacity 0.8
+
+.date-day
+  font-family var(--font-hand, 'Bebas Neue', 'Impact', sans-serif)
+  font-size 1.6rem
+  font-weight 400
+  letter-spacing 1px
+  line-height 1
+
+.card-info
+  flex 1
+  min-width 0
+
+.card-title
+  font-family var(--font-hand, 'Bebas Neue', 'Impact', sans-serif)
+  font-size 1.4rem
+  font-weight 400
+  letter-spacing 1px
+  text-transform uppercase
+  color var(--text-ink, #2c2824)
+  margin 0 0 0.4rem
+  line-height 1.2
+  transition color 0.3s ease
+  position relative
+
+  // Underline accent
+  &::after
+    content ''
+    position absolute
+    bottom -3px
+    left 0
+    width 50%
+    height 3px
+    background var(--accent-mustard, #d4a84b)
+    opacity 0.35
+    transform rotate(-0.5deg)
+    border-radius 2px
+
+.card-excerpt
+  font-family var(--font-sketch, 'Work Sans', sans-serif)
+  font-size 0.9rem
+  font-weight 500
+  color var(--text-light, #6b6359)
+  line-height 1.5
+  margin 0
+  display -webkit-box
+  -webkit-line-clamp 2
+  -webkit-box-orient vertical
+  overflow hidden
+
+.card-arrow
+  color var(--text-light, #6b6359)
+  transition all 0.3s ease
+  flex-shrink 0
+
+// Raw frame decoration
+.card-frame
+  position absolute
+  top -6px
+  left -6px
+  right -6px
+  bottom -6px
+  border 2px dashed var(--accent-mustard, #d4a84b)
+  opacity 0.25
+  pointer-events none
+  z-index 0
+
+// ============================================
+// Animations
+// ============================================
+
+@keyframes fade-in-slide
+  from
+    opacity 0
+    transform translateX(-15px)
+  to
+    opacity 1
+    transform translateX(0)
+
+@keyframes crown-float
+  0%, 100%
+    transform translateX(-50%) rotate(-3deg)
+  25%
+    transform translateX(-50%) rotate(-6deg) translateY(-2px)
+  50%
+    transform translateX(-50%) rotate(-1deg)
+  75%
+    transform translateX(-50%) rotate(-5deg) translateY(-1px)
+
+@keyframes crown-bounce
+  0%, 100%
+    transform rotate(-8deg) translateY(0)
+  50%
+    transform rotate(-3deg) translateY(-3px)
+
+@keyframes jitter
+  0%
+    transform rotate(-5deg) translate(0, 0)
+  25%
+    transform rotate(-4deg) translate(-1px, 1px)
+  50%
+    transform rotate(-6deg) translate(1px, -1px)
+  75%
+    transform rotate(-5deg) translate(-1px, -1px)
+  100%
+    transform rotate(-4deg) translate(1px, 1px)
+
+@keyframes splatter-pulse
+  0%, 100%
+    opacity 0.25
+    transform scale(1) rotate(0deg)
+  50%
+    opacity 0.4
+    transform scale(1.15) rotate(5deg)
+
+// ============================================
+// Responsive Styles
+// ============================================
+
+@media (max-width: 600px)
+  .archive-hero
+    padding 3rem 1.5rem 2rem
+
+  .title-text
+    font-size 2.6rem
+    letter-spacing 2px
+
+  .archive-crown
+    width 40px
+    height 28px
+    top -38px
+
+  .archive-subtitle
+    font-size 1rem
+
+  .hero-stroke
+    display none
+
+  .archive-content
+    padding 0 1rem
+
+  .year-text
+    font-size 1.6rem
+    letter-spacing 2px
+
+  .card-content
+    flex-wrap wrap
+    gap 1rem
+    padding 1rem 1.2rem
+
+  .card-date
+    min-width 50px
+    padding 0.5rem 0.7rem
+
+  .date-day
+    font-size 1.4rem
+
+  .card-title
+    font-size 1.2rem
+
+  .card-excerpt
+    font-size 0.85rem
+    -webkit-line-clamp 2
+
+  .card-scribble
+    font-size 0.6rem
+    right 80px
+
+  .mini-crown
+    width 18px
+    height 12px
+    right 30px
+
+  .card-splatter
+    transform scale(0.7)
+    opacity 0.12
+
+@media (max-width: 400px)
+  .card-content
+    flex-direction column
+    align-items flex-start
+
+  .card-date
+    flex-direction row
+    gap 0.5rem
+    padding 0.4rem 0.8rem
+
+  .date-day
+    font-size 1.2rem
+
+  .card-arrow
+    position absolute
+    right 1rem
+    top 50%
+    transform translateY(-50%)

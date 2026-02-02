@@ -1,20 +1,99 @@
-.page-nav {
-  padding: 0 20px;
+// ============================================
+// Paginator - Basquiat Raw Street Art Aesthetic
+// ============================================
 
-  .prev,
-  .page-number {
-    padding: 10px 20px 10px 0;
-  }
+.basquiat-paginator
+  max-width 960px
+  margin 3rem auto 0
+  padding 2rem 1.5rem
+  position relative
+  text-align center
 
-  .next {
-    float: right;
-  }
+.paginator-wrapper
+  display flex
+  justify-content center
+  align-items center
+  gap 0.8rem
+  flex-wrap wrap
 
-  a {
-    color: #777;
+.paginator-crown
+  position absolute
+  top -10px
+  left 50%
+  transform translateX(-50%) rotate(-3deg)
+  filter drop-shadow(1px 1px 0 var(--text-ink, #2c2824))
+  opacity 0.6
 
-    &:hover {
-      color: #000;
-    }
-  }
-}
+// Pagination links
+.basquiat-paginator a,
+.basquiat-paginator span
+  font-family var(--font-hand, 'Bebas Neue', 'Impact', sans-serif)
+  font-size 1.1rem
+  font-weight 400
+  letter-spacing 1px
+  text-transform uppercase
+  text-decoration none
+  padding 0.6rem 1rem
+  position relative
+  transition all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)
+
+.basquiat-paginator a
+  color var(--text-pencil, #3d3832)
+  background var(--bg-paper, #f7f4ed)
+  border 2px solid var(--text-pencil, #3d3832)
+  box-shadow 3px 3px 0 var(--border-sketch, #c9c2b5)
+
+  &:hover
+    transform translateY(-2px) rotate(-1deg)
+    box-shadow 5px 5px 0 var(--border-sketch, #c9c2b5)
+    border-color var(--accent-terracotta, #c45d3a)
+    color var(--accent-terracotta, #c45d3a)
+
+  svg
+    display inline-block
+    vertical-align middle
+    margin-top -2px
+
+// Previous and next links
+.basquiat-paginator .prev,
+.basquiat-paginator .next
+  display inline-flex
+  align-items center
+  gap 0.4rem
+
+// Current page number
+.basquiat-paginator .page-number.current
+  background var(--text-ink, #2c2824)
+  color var(--bg-cream, #faf8f3)
+  border-color var(--text-ink, #2c2824)
+  transform rotate(-1deg)
+  box-shadow 3px 3px 0 var(--accent-mustard, #d4a84b)
+
+// Extend link styles
+.basquiat-paginator .extend
+  color var(--text-light, #6b6359)
+  border-color transparent
+  background transparent
+  box-shadow none
+
+  &:hover
+    border-color transparent
+    background transparent
+    box-shadow none
+
+// ============================================
+// Responsive
+// ============================================
+
+@media (max-width: 600px)
+  .basquiat-paginator
+    padding 1.5rem 1rem
+
+  .basquiat-paginator a,
+  .basquiat-paginator span
+    font-size 0.95rem
+    padding 0.5rem 0.8rem
+
+  .paginator-crown
+    width 20px
+    height 13px
