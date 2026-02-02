@@ -22,18 +22,17 @@ separator: '-'
 # RSS
 rss: /atom.xml
 
-# SNS config
+# SNS config (social links - used in footer)
 sns:
-  Blog: /archives
   GitHub: https://github.com/sooham
-  Linkedin: www.linkedin.com/in/sooham-rafiz
+  LinkedIn: https://www.linkedin.com/in/sooham-rafiz
 
 # Google Analytics (GA4)
 # Get your measurement ID from: https://analytics.google.com
 google_analytics: G-WC8766BHKN
 
-# Nav menu
+# Nav menu (used in header partial)
 menu:
-  Home: /
-  #Archives: /archives
-  #About: /about
+  About: /
+  Blog: /archives
+  Visualizations: /visualizations

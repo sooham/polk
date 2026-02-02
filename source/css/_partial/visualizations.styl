@@ -1,0 +1,877 @@
+// ============================================
+// Visualizations Page - Basquiat Collage Style
+// ============================================
+
+// Inherit color variables from landing page
+// --bg-cream, --bg-paper, --text-pencil, --text-ink, --text-light
+// --accent-terracotta, --accent-sage, --accent-mustard, --border-sketch
+// --font-hand, --font-sketch
+
+.visualizations-page.handdrawn
+  min-height 100vh
+  padding 0 24px 4rem
+  background var(--bg-cream)
+  position relative
+  overflow-x hidden
+
+  // Paper texture overlay matching landing page
+  &::before
+    content ''
+    position fixed
+    top 0
+    left 0
+    right 0
+    bottom 0
+    background-image url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E")
+    pointer-events none
+    z-index 0
+
+  > *
+    position relative
+    z-index 1
+
+// Additional paper texture layer
+.viz-paper-texture
+  position fixed
+  top 0
+  left 0
+  right 0
+  bottom 0
+  pointer-events none
+  opacity 0.3
+  background radial-gradient(ellipse at 30% 40%, rgba(255, 248, 235, 0.5) 0%, transparent 50%), radial-gradient(ellipse at 70% 60%, rgba(255, 245, 225, 0.4) 0%, transparent 50%)
+  z-index 0
+
+// ============================================
+// Floating Basquiat Decorations
+// ============================================
+
+.viz-decoration
+  position absolute
+  font-size 3.5rem
+  opacity 0.08
+  pointer-events none
+  z-index 0
+  animation float-decoration 6s ease-in-out infinite
+
+  &.crown-left
+    top 15%
+    left 8%
+    animation-delay 0s
+
+  &.symbol-right
+    top 40%
+    right 10%
+    font-size 5rem
+    animation-delay 1.5s
+
+  &.star-center
+    bottom 20%
+    left 50%
+    transform translateX(-50%)
+    animation-delay 3s
+
+@keyframes float-decoration
+  0%, 100%
+    transform translateY(0) rotate(0deg)
+  50%
+    transform translateY(-25px) rotate(8deg)
+
+.viz-text-art
+  position absolute
+  font-family var(--font-hand)
+  font-size 6rem
+  font-weight 700
+  color var(--text-pencil)
+  opacity 0.04
+  transform rotate(-8deg)
+  pointer-events none
+  z-index 0
+
+  &.text-viz
+    top 25%
+    right 5%
+
+  &.text-art
+    bottom 15%
+    left 8%
+    font-size 5rem
+    transform rotate(5deg)
+
+// ============================================
+// Page Header
+// ============================================
+
+.visualizations-page .page-header
+  max-width 900px
+  margin 0 auto 4rem
+  padding-top 3rem
+  text-align center
+
+.visualizations-page .page-title
+  font-family var(--font-hand)
+  font-size 4rem
+  font-weight 400
+  letter-spacing 3px
+  text-transform uppercase
+  margin 0 0 1.5rem
+  color var(--text-ink)
+  position relative
+  display inline-block
+  animation fade-in-up 0.8s ease-out
+
+.title-text
+  position relative
+  z-index 1
+
+.title-underline
+  position absolute
+  bottom 5px
+  left -3%
+  width 106%
+  height 12px
+  background linear-gradient(90deg, transparent 0%, var(--accent-mustard) 8%, var(--accent-mustard) 50%, var(--accent-mustard) 92%, transparent 100%)
+  opacity 0.4
+  border-radius 6px
+  transform rotate(-1.5deg)
+
+.visualizations-page .page-intro
+  font-family var(--font-sketch)
+  font-size 1.2rem
+  line-height 1.9
+  font-weight 500
+  color var(--text-pencil)
+  margin 0 auto
+  max-width 700px
+  animation fade-in-up 0.8s ease-out 0.2s both
+
+// ============================================
+// Visualization Cards Grid
+// ============================================
+
+.viz-grid
+  max-width 1000px
+  margin 0 auto
+  display grid
+  grid-template-columns repeat(auto-fit, minmax(300px, 1fr))
+  gap 3rem 2.5rem
+  padding 0 1rem
+
+// ============================================
+// Individual Visualization Cards
+// ============================================
+
+.viz-card
+  display block
+  text-decoration none
+  color inherit
+  position relative
+  background var(--bg-paper)
+  border 3px solid var(--text-pencil)
+  border-radius 12px
+  overflow visible
+  transform rotate(var(--card-rotation, -1deg))
+  box-shadow 6px 6px 0 var(--border-sketch)
+  transition all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)
+  animation fade-in-up 0.6s ease-out both
+
+  // Stagger card animations
+  &:nth-child(1)
+    --card-rotation: -1.2deg
+    animation-delay 0.1s
+
+  &:nth-child(2)
+    --card-rotation: 0.8deg
+    animation-delay 0.2s
+
+  &:nth-child(3)
+    --card-rotation: -0.6deg
+    animation-delay 0.3s
+
+  &:nth-child(4)
+    --card-rotation: 1deg
+    animation-delay 0.4s
+
+  &:hover
+    transform rotate(0deg) translateY(-8px) scale(1.02)
+    box-shadow 10px 10px 0 var(--border-sketch), 0 15px 35px rgba(0, 0, 0, 0.12)
+    border-color var(--accent-terracotta)
+
+    .card-corners .corner
+      opacity 1
+      border-color var(--accent-terracotta)
+
+    .preview-stamp
+      transform rotate(0deg) scale(1.1)
+
+    .preview-accent
+      opacity 0.3
+      animation-play-state paused
+
+  // Coming soon cards - more subdued
+  &.coming-soon
+    opacity 0.75
+
+    .viz-preview
+      opacity 0.6
+
+    &:hover
+      transform rotate(var(--card-rotation)) translateY(-2px)
+      box-shadow 6px 6px 0 var(--border-sketch)
+      border-color var(--text-pencil)
+
+      .card-corners .corner
+        opacity 0.5
+
+// ============================================
+// Card Corner Decorations
+// ============================================
+
+.card-corners
+  position absolute
+  top 0
+  left 0
+  right 0
+  bottom 0
+  pointer-events none
+  z-index 10
+
+  .corner
+    position absolute
+    width 18px
+    height 18px
+    border-color var(--accent-mustard)
+    opacity 0
+    transition all 0.3s ease
+
+    &.top-left
+      top -3px
+      left -3px
+      border-top 3px solid
+      border-left 3px solid
+
+    &.top-right
+      top -3px
+      right -3px
+      border-top 3px solid
+      border-right 3px solid
+
+    &.bottom-left
+      bottom -3px
+      left -3px
+      border-bottom 3px solid
+      border-left 3px solid
+
+    &.bottom-right
+      bottom -3px
+      right -3px
+      border-bottom 3px solid
+      border-right 3px solid
+
+// ============================================
+// Card Preview Area (Avant-Garde Collage Style)
+// ============================================
+
+.viz-preview.collage-style
+  height 220px
+  position relative
+  overflow hidden
+  background var(--bg-cream)
+  border-bottom 3px solid var(--text-pencil)
+  display flex
+  align-items center
+  justify-content center
+
+// ============================================
+// Multi-Layered Collage Backgrounds
+// ============================================
+
+.collage-layer
+  position absolute
+  width 250px
+  height 250px
+  opacity 0.12
+  z-index 0
+  border 4px solid var(--text-pencil)
+  box-shadow 6px 6px 0 rgba(0, 0, 0, 0.08)
+  filter grayscale(30%)
+
+.collage-shape
+  position absolute
+  opacity 0.06
+  z-index 0
+  border 3px solid var(--text-pencil)
+
+.collage-text
+  position absolute
+  font-family var(--font-hand)
+  font-weight 700
+  color var(--text-pencil)
+  opacity 0.08
+  z-index 1
+  pointer-events none
+
+.collage-crown
+  position absolute
+  font-size 2.5rem
+  opacity 0.15
+  z-index 1
+  filter drop-shadow(2px 2px 0 var(--text-pencil))
+  animation float-crown 4s ease-in-out infinite
+
+@keyframes float-crown
+  0%, 100%
+    transform translateY(0) rotate(0deg)
+  50%
+    transform translateY(-15px) rotate(-10deg)
+
+// ============================================
+// Letter Boxed Collage
+// ============================================
+
+.letterbox-collage
+  .collage-layer.layer-1
+    top -30px
+    left -40px
+    background linear-gradient(135deg, var(--accent-terracotta) 0%, var(--accent-mustard) 100%)
+    transform rotate(-15deg)
+    clip-path polygon(0 0, 100% 0, 90% 100%, 0% 90%)
+    animation drift-layer-1 20s ease-in-out infinite
+
+  .collage-layer.layer-2
+    bottom -20px
+    right -30px
+    background linear-gradient(45deg, var(--accent-sage) 0%, var(--accent-terracotta) 100%)
+    transform rotate(12deg)
+    clip-path polygon(10% 0, 100% 10%, 100% 100%, 0% 100%)
+    animation drift-layer-2 25s ease-in-out infinite
+
+  .collage-layer.layer-3
+    top 50%
+    left 50%
+    transform translate(-50%, -50%) rotate(-8deg)
+    background var(--accent-mustard)
+    opacity 0.08
+    width 180px
+    height 180px
+    border-radius 50% 40% 60% 40%
+    animation drift-layer-3 22s ease-in-out infinite
+
+  .collage-shape.shape-1
+    top 15px
+    right 20px
+    width 60px
+    height 60px
+    background var(--accent-terracotta)
+    transform rotate(45deg)
+
+  .collage-shape.shape-2
+    bottom 20px
+    left 15px
+    width 80px
+    height 40px
+    background var(--accent-sage)
+    transform rotate(-20deg)
+    border-radius 40px
+
+  .collage-text.text-1
+    top 10px
+    left 15px
+    font-size 3rem
+    transform rotate(-12deg)
+
+  .collage-text.text-2
+    bottom 15px
+    right 20px
+    font-size 2.5rem
+    transform rotate(8deg)
+
+  .collage-crown
+    top 10px
+    left 50%
+    transform translateX(-50%) rotate(-15deg)
+
+// ============================================
+// Token Embeddings Collage
+// ============================================
+
+.embeddings-collage
+  .collage-layer.layer-1
+    top -25px
+    right -35px
+    background linear-gradient(225deg, var(--accent-sage) 0%, var(--accent-mustard) 100%)
+    transform rotate(18deg)
+    clip-path polygon(0 0, 100% 0, 100% 90%, 10% 100%)
+    animation drift-layer-2 23s ease-in-out infinite
+
+  .collage-layer.layer-2
+    bottom -30px
+    left -25px
+    background linear-gradient(315deg, var(--accent-terracotta) 0%, var(--accent-sage) 100%)
+    transform rotate(-10deg)
+    clip-path polygon(0 10%, 90% 0, 100% 100%, 0% 100%)
+    animation drift-layer-1 21s ease-in-out infinite
+
+  .collage-layer.layer-3
+    top 40%
+    right 30%
+    background var(--accent-terracotta)
+    opacity 0.1
+    width 140px
+    height 140px
+    transform rotate(30deg)
+    clip-path polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%)
+    animation drift-layer-3 24s ease-in-out infinite
+
+  .collage-shape.shape-1
+    top 25px
+    left 15px
+    width 70px
+    height 70px
+    background var(--accent-mustard)
+    transform rotate(-30deg)
+    border-radius 20%
+
+  .collage-shape.shape-2
+    bottom 15px
+    right 25px
+    width 50px
+    height 90px
+    background var(--accent-sage)
+    transform rotate(15deg)
+
+  .collage-text.text-1
+    top 15px
+    right 10px
+    font-size 2.8rem
+    transform rotate(10deg)
+
+  .collage-text.text-2
+    bottom 20px
+    left 15px
+    font-size 3.2rem
+    transform rotate(-15deg)
+
+// ============================================
+// Optimization Collage
+// ============================================
+
+.optimization-collage
+  .collage-layer.layer-1
+    top -20px
+    left -30px
+    background linear-gradient(45deg, var(--accent-mustard) 0%, var(--accent-terracotta) 100%)
+    transform rotate(-20deg)
+    clip-path polygon(0 0, 100% 10%, 90% 100%, 0% 100%)
+    animation drift-layer-3 26s ease-in-out infinite
+
+  .collage-layer.layer-2
+    top -15px
+    right -40px
+    background linear-gradient(135deg, var(--accent-sage) 0%, var(--accent-mustard) 100%)
+    transform rotate(15deg)
+    clip-path polygon(10% 0, 100% 0, 100% 100%, 0% 90%)
+    animation drift-layer-1 19s ease-in-out infinite
+
+  .collage-layer.layer-3
+    bottom 0
+    left 20%
+    background var(--accent-sage)
+    opacity 0.09
+    width 160px
+    height 120px
+    transform rotate(-25deg)
+    border-radius 60% 40% 40% 60%
+    animation drift-layer-2 23s ease-in-out infinite
+
+  .collage-shape.shape-1
+    bottom 30px
+    right 15px
+    width 65px
+    height 65px
+    background var(--accent-terracotta)
+    transform rotate(20deg)
+    clip-path polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)
+
+  .collage-shape.shape-2
+    top 20px
+    left 20px
+    width 90px
+    height 50px
+    background var(--accent-mustard)
+    transform rotate(-15deg)
+    border-radius 25px
+
+  .collage-text.text-1
+    bottom 10px
+    left 10px
+    font-size 3.5rem
+    transform rotate(-8deg)
+
+  .collage-text.text-2
+    top 20px
+    right 15px
+    font-size 4rem
+    transform rotate(12deg)
+
+// ============================================
+// Manim Collage
+// ============================================
+
+.manim-collage
+  .collage-layer.layer-1
+    bottom -25px
+    left -35px
+    background linear-gradient(315deg, var(--accent-terracotta) 0%, var(--accent-sage) 100%)
+    transform rotate(-18deg)
+    clip-path polygon(0 0, 100% 0, 100% 100%, 10% 90%)
+    animation drift-layer-2 24s ease-in-out infinite
+
+  .collage-layer.layer-2
+    top -30px
+    right -20px
+    background linear-gradient(225deg, var(--accent-mustard) 0%, var(--accent-terracotta) 100%)
+    transform rotate(22deg)
+    clip-path polygon(0 10%, 90% 0, 100% 100%, 0% 100%)
+    animation drift-layer-3 20s ease-in-out infinite
+
+  .collage-layer.layer-3
+    top 30%
+    left 40%
+    transform translate(-50%, -50%) rotate(15deg)
+    background var(--accent-sage)
+    opacity 0.1
+    width 200px
+    height 150px
+    clip-path polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)
+    animation drift-layer-1 27s ease-in-out infinite
+
+  .collage-shape.shape-1
+    top 20px
+    right 25px
+    width 75px
+    height 75px
+    background var(--accent-mustard)
+    transform rotate(35deg)
+    border-radius 50%
+
+  .collage-shape.shape-2
+    bottom 25px
+    left 20px
+    width 55px
+    height 85px
+    background var(--accent-terracotta)
+    transform rotate(-25deg)
+    clip-path polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)
+
+  .collage-text.text-1
+    top 15px
+    left 10px
+    font-size 3.8rem
+    transform rotate(-10deg)
+
+  .collage-text.text-2
+    bottom 15px
+    right 15px
+    font-size 3rem
+    transform rotate(15deg)
+
+  .collage-crown
+    bottom 15px
+    right 50%
+    transform translateX(50%) rotate(20deg)
+
+// Drift animations for layers
+@keyframes drift-layer-1
+  0%, 100%
+    transform rotate(var(--base-rotation, 0deg)) translateX(0) translateY(0)
+  33%
+    transform rotate(calc(var(--base-rotation, 0deg) + 3deg)) translateX(15px) translateY(-10px)
+  66%
+    transform rotate(calc(var(--base-rotation, 0deg) - 2deg)) translateX(-10px) translateY(10px)
+
+@keyframes drift-layer-2
+  0%, 100%
+    transform rotate(var(--base-rotation, 0deg)) translateX(0) translateY(0)
+  33%
+    transform rotate(calc(var(--base-rotation, 0deg) - 4deg)) translateX(-12px) translateY(15px)
+  66%
+    transform rotate(calc(var(--base-rotation, 0deg) + 2deg)) translateX(10px) translateY(-8px)
+
+@keyframes drift-layer-3
+  0%, 100%
+    transform translate(var(--base-x, -50%), var(--base-y, -50%)) rotate(var(--base-rotation, 0deg))
+  50%
+    transform translate(calc(var(--base-x, -50%) + 20px), calc(var(--base-y, -50%) - 15px)) rotate(calc(var(--base-rotation, 0deg) + 5deg))
+
+.preview-symbol
+  font-family var(--font-hand)
+  font-size 5rem
+  font-weight 700
+  color var(--text-pencil)
+  position relative
+  z-index 5
+  transform rotate(-5deg)
+  text-shadow 4px 4px 0 rgba(0, 0, 0, 0.08), 2px 2px 0 var(--bg-cream)
+  filter drop-shadow(0 0 20px rgba(255, 255, 255, 0.5))
+
+.preview-stamp
+  position absolute
+  top 15px
+  right 15px
+  width 50px
+  height 50px
+  background var(--accent-terracotta)
+  border 4px solid var(--text-pencil)
+  border-radius 50%
+  display flex
+  align-items center
+  justify-content center
+  font-size 1.8rem
+  color white
+  transform rotate(15deg)
+  box-shadow 4px 4px 0 var(--border-sketch), 0 0 0 2px var(--bg-cream)
+  transition all 0.3s ease
+  z-index 6
+
+.preview-accent
+  position absolute
+  font-family var(--font-hand)
+  font-size 3rem
+  font-weight 700
+  color var(--text-pencil)
+  opacity 0.12
+  z-index 2
+  animation drift-accent 8s ease-in-out infinite
+  text-shadow 2px 2px 0 rgba(0, 0, 0, 0.05)
+
+  &.accent-1
+    top 20%
+    left 15%
+    animation-delay 0s
+
+  &.accent-2
+    bottom 20%
+    right 15%
+    animation-delay 2s
+
+@keyframes drift-accent
+  0%, 100%
+    transform translateY(0) rotate(0deg)
+  50%
+    transform translateY(-20px) rotate(15deg)
+
+// ============================================
+// Card Content Area
+// ============================================
+
+.viz-card .viz-content
+  padding 1.8rem 1.8rem 2rem
+  position relative
+  z-index 2
+
+  h3
+    font-family var(--font-hand)
+    font-size 2rem
+    font-weight 400
+    letter-spacing 1px
+    text-transform uppercase
+    color var(--text-ink)
+    margin 0 0 1rem
+    line-height 1.2
+    position relative
+
+    &::after
+      content ''
+      position absolute
+      bottom -5px
+      left 0
+      width 50%
+      height 3px
+      background var(--accent-sage)
+      opacity 0.3
+      transform rotate(-0.8deg)
+      border-radius 2px
+
+  p
+    font-family var(--font-sketch)
+    font-size 1.05rem
+    line-height 1.7
+    font-weight 500
+    color var(--text-light)
+    margin 0 0 1.5rem
+
+// ============================================
+// Card Metadata (Badges & Tech)
+// ============================================
+
+.viz-meta
+  display flex
+  align-items center
+  gap 1rem
+  flex-wrap wrap
+
+.viz-badge
+  font-family var(--font-hand)
+  font-size 1.05rem
+  font-weight 400
+  letter-spacing 1px
+  text-transform uppercase
+  padding 0.5rem 1.2rem
+  border-radius 20px
+  border 2px solid var(--text-pencil)
+  display inline-block
+  transform rotate(-2deg)
+  transition all 0.3s ease
+  box-shadow 2px 2px 0 var(--border-sketch)
+
+  &.available
+    background var(--accent-terracotta)
+    color white
+    border-color var(--text-pencil)
+
+  &.soon
+    background transparent
+    color var(--text-light)
+    border-style dashed
+
+.viz-card:hover .viz-badge.available
+  transform rotate(0deg) scale(1.05)
+  box-shadow 3px 3px 0 var(--border-sketch)
+
+.viz-tech
+  font-family var(--font-mono-hand)
+  font-size 0.85rem
+  font-weight 400
+  color var(--text-light)
+  padding 0.4rem 0.8rem
+  border 1px dashed var(--border-sketch)
+  border-radius 4px
+  opacity 0.7
+
+  &::before
+    content '< '
+    opacity 0.5
+
+  &::after
+    content ' />'
+    opacity 0.5
+
+// ============================================
+// Animations
+// ============================================
+
+@keyframes fade-in-up
+  from
+    opacity 0
+    transform translateY(25px)
+  to
+    opacity 1
+    transform translateY(0)
+
+// ============================================
+// Responsive Design
+// ============================================
+
+@media (max-width: 768px)
+  .visualizations-page.handdrawn
+    padding 0 16px 3rem
+
+  .visualizations-page .page-header
+    padding-top 2rem
+    margin-bottom 3rem
+
+  .visualizations-page .page-title
+    font-size 3rem
+    letter-spacing 2px
+
+  .visualizations-page .page-intro
+    font-size 1.1rem
+
+  .viz-grid
+    grid-template-columns 1fr
+    gap 2.5rem
+    padding 0
+
+  .viz-card
+    --card-rotation: 0deg !important
+
+    &:hover
+      transform translateY(-4px)
+
+  .viz-preview.collage-style
+    height 180px
+
+  .collage-layer
+    width 200px
+    height 200px
+
+  .collage-text
+    font-size 2.5rem !important
+
+  .collage-crown
+    font-size 2rem
+
+  .preview-symbol
+    font-size 4rem
+
+  .viz-text-art
+    font-size 4rem
+
+    &.text-art
+      font-size 3.5rem
+
+  .viz-decoration
+    font-size 2.5rem
+
+    &.symbol-right
+      font-size 3.5rem
+
+@media (max-width: 480px)
+  .visualizations-page .page-title
+    font-size 2.2rem
+    letter-spacing 1px
+
+  .visualizations-page .page-intro
+    font-size 1rem
+    line-height 1.7
+
+  .viz-card .viz-content
+    padding 1.5rem
+
+    h3
+      font-size 1.5rem
+
+    p
+      font-size 1rem
+
+  .viz-preview.collage-style
+    height 160px
+
+  .collage-layer
+    width 150px
+    height 150px
+    opacity 0.1
+
+  .collage-shape
+    display none
+
+  .collage-text
+    font-size 2rem !important
+    opacity 0.06
+
+  .collage-crown
+    display none
+
+  .preview-symbol
+    font-size 3.5rem
+
+  .preview-accent
+    font-size 2rem
+
+  .viz-badge
+    font-size 1rem
+    padding 0.4rem 1rem
+
+  .viz-text-art
+    display none

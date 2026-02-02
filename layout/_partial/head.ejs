@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <!--<html lang="<%= config.language || 'en' %>">-->
 <head>
+  <!-- Basquiat-inspired bold, street art aesthetic fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
   <% if (theme.google_analytics && theme.google_analytics !== 'G-XXXXXXXXXX') { %>
   <!-- Google Analytics (GA4) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=<%= theme.google_analytics %>"></script>
@@ -90,4 +95,9 @@
 </script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
   <%- css('/css/style.css') %>
+
+  <% if (is_home()) { %>
+  <!-- Lorenz attractor background for landing page -->
+  <script defer src="<%- url_for('/js/lorenz-background.js') %>"></script>
+  <% } %>
 </head>

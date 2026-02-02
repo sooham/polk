@@ -1,0 +1,147 @@
+<%- partial('_partial/header') %>
+<div class="visualizations-page handdrawn">
+  <!-- Paper texture background -->
+  <div class="viz-paper-texture"></div>
+
+  <!-- Basquiat-style floating decorations -->
+  <div class="viz-decoration crown-left">👑</div>
+  <div class="viz-decoration symbol-right">©</div>
+  <div class="viz-decoration star-center">★</div>
+  <div class="viz-text-art text-viz">VIZ</div>
+  <div class="viz-text-art text-art">ART</div>
+
+  <div class="page-header">
+    <h1 class="page-title">
+      <span class="title-text">Visualizations</span>
+      <span class="title-underline"></span>
+    </h1>
+    <p class="page-intro">
+      Interactive explorations of algorithms, embeddings, and mathematical concepts.
+      These are single-page applications built to help understand complex ideas visually.
+    </p>
+  </div>
+
+  <div class="viz-grid">
+    <a href="/visualizations/letter-boxed/" class="viz-card active-viz">
+      <div class="card-corners">
+        <span class="corner top-left"></span>
+        <span class="corner top-right"></span>
+        <span class="corner bottom-left"></span>
+        <span class="corner bottom-right"></span>
+      </div>
+      <div class="viz-preview collage-style letterbox-collage">
+        <!-- Multi-layered collage background -->
+        <div class="collage-layer layer-1"></div>
+        <div class="collage-layer layer-2"></div>
+        <div class="collage-layer layer-3"></div>
+        <div class="collage-shape shape-1"></div>
+        <div class="collage-shape shape-2"></div>
+        <div class="collage-text text-1">WORD</div>
+        <div class="collage-text text-2">GRAPH</div>
+        <div class="preview-symbol">ABC</div>
+        <div class="preview-stamp">✓</div>
+        <div class="collage-crown">👑</div>
+      </div>
+      <div class="viz-content">
+        <h3>Letter Boxed Solver</h3>
+        <p>Interactive solver for the NYT Letter Boxed puzzle. Find optimal solutions using graph algorithms.</p>
+        <div class="viz-meta">
+          <span class="viz-badge available">Play Now</span>
+          <span class="viz-tech">JavaScript</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="/visualizations/token-embeddings/" class="viz-card coming-soon">
+      <div class="card-corners">
+        <span class="corner top-left"></span>
+        <span class="corner top-right"></span>
+        <span class="corner bottom-left"></span>
+        <span class="corner bottom-right"></span>
+      </div>
+      <div class="viz-preview collage-style embeddings-collage">
+        <!-- Multi-layered collage background -->
+        <div class="collage-layer layer-1"></div>
+        <div class="collage-layer layer-2"></div>
+        <div class="collage-layer layer-3"></div>
+        <div class="collage-shape shape-1"></div>
+        <div class="collage-shape shape-2"></div>
+        <div class="collage-text text-1">VECTOR</div>
+        <div class="collage-text text-2">SPACE</div>
+        <div class="preview-symbol">∞</div>
+        <div class="preview-accent accent-1">©</div>
+        <div class="preview-accent accent-2">→</div>
+      </div>
+      <div class="viz-content">
+        <h3>Token Embedding Visualizer</h3>
+        <p>Explore how language models represent tokens in high-dimensional vector space.</p>
+        <div class="viz-meta">
+          <span class="viz-badge soon">Coming Soon</span>
+          <span class="viz-tech">PyTorch</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="/visualizations/constrained-optimization/" class="viz-card coming-soon">
+      <div class="card-corners">
+        <span class="corner top-left"></span>
+        <span class="corner top-right"></span>
+        <span class="corner bottom-left"></span>
+        <span class="corner bottom-right"></span>
+      </div>
+      <div class="viz-preview collage-style optimization-collage">
+        <!-- Multi-layered collage background -->
+        <div class="collage-layer layer-1"></div>
+        <div class="collage-layer layer-2"></div>
+        <div class="collage-layer layer-3"></div>
+        <div class="collage-shape shape-1"></div>
+        <div class="collage-shape shape-2"></div>
+        <div class="collage-text text-1">DESCENT</div>
+        <div class="collage-text text-2">∇f</div>
+        <div class="preview-symbol">∇</div>
+        <div class="preview-accent accent-1">λ</div>
+        <div class="preview-accent accent-2">✱</div>
+      </div>
+      <div class="viz-content">
+        <h3>Constrained Optimization</h3>
+        <p>Visualize gradient descent with constraints, Lagrange multipliers, and feasible regions.</p>
+        <div class="viz-meta">
+          <span class="viz-badge soon">Coming Soon</span>
+          <span class="viz-tech">WebGL</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="/visualizations/manim-videos/" class="viz-card coming-soon">
+      <div class="card-corners">
+        <span class="corner top-left"></span>
+        <span class="corner top-right"></span>
+        <span class="corner bottom-left"></span>
+        <span class="corner bottom-right"></span>
+      </div>
+      <div class="viz-preview collage-style manim-collage">
+        <!-- Multi-layered collage background -->
+        <div class="collage-layer layer-1"></div>
+        <div class="collage-layer layer-2"></div>
+        <div class="collage-layer layer-3"></div>
+        <div class="collage-shape shape-1"></div>
+        <div class="collage-shape shape-2"></div>
+        <div class="collage-text text-1">MATH</div>
+        <div class="collage-text text-2">VIDEO</div>
+        <div class="preview-symbol">▶</div>
+        <div class="preview-accent accent-1">π</div>
+        <div class="preview-accent accent-2">∫</div>
+        <div class="collage-crown">⚡</div>
+      </div>
+      <div class="viz-content">
+        <h3>Mathematical Animations</h3>
+        <p>Manim-generated videos explaining mathematical and algorithmic concepts.</p>
+        <div class="viz-meta">
+          <span class="viz-badge soon">Coming Soon</span>
+          <span class="viz-tech">Manim</span>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+<%- partial('_partial/footer') %>
